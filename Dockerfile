@@ -9,10 +9,12 @@ RUN apt-get update && \
 RUN add-apt-repository ppa:pmjdebruijn/darktable-release -y
 
 # Install darktable
-RUN apt-get update && apt-get install -y darktable 
+RUN apt-get install -y darktable libcanberra-gtk3*
 
-# Install libcanberra for darktable
-RUN apt-get install -y libcanberra-gtk3-module
+# Install updates and cleanup after done.
+RUN apt-get update && \
+    apt-get autoclean \
+    apt-get clean
 
 # Create a user account for darktable to run as.
 RUN mkdir -p /home/darktable && \
